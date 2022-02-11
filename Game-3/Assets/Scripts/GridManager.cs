@@ -5,8 +5,10 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
 
-    [SerializeField] int gridSize;
-    [SerializeField] float tileDistance;
+    [SerializeField] private int gridSize;
+    [SerializeField] private float tileDistance;
+    public int GridSize { get => gridSize; }
+    public float TileDistance { get => tileDistance; }
 
     [SerializeField] GameObject tilePrefab;
     TileManager[,] tiles;
@@ -19,10 +21,10 @@ public class GridManager : MonoBehaviour
         //Instantiate the tiles
 
         //Z position
-        for(int i = 0; i < gridSize; i++)
+        for (int i = 0; i < gridSize; i++)
         {
             //X position
-            for(int j = 0; j < gridSize; j++)
+            for (int j = 0; j < gridSize; j++)
             {
                 Vector3 pos = new Vector3(tileDistance * j, 0, tileDistance * i);
                 GameObject obj = Instantiate(tilePrefab, pos, Quaternion.identity);
@@ -47,6 +49,6 @@ public class GridManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
