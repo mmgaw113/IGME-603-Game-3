@@ -5,13 +5,14 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
 
-    [SerializeField] int gridSize;
-    [SerializeField] float tileDistance;
+    [SerializeField] private int gridSize;
+    [SerializeField] private float tileDistance;
+    public int GridSize { get => gridSize; }
+    public float TileDistance { get => tileDistance; }
 
     [SerializeField] GameObject tilePrefab;
     TileManager[,] tiles;
 
-    // Start is called before the first frame update
     void Start()
     {
         tiles = new TileManager[gridSize, gridSize];
@@ -19,13 +20,13 @@ public class GridManager : MonoBehaviour
         //Instantiate the tiles
 
         //Z position
-        for(int i = 0; i < gridSize; i++)
+        for (int i = 0; i < gridSize; i++)
         {
             //X position
-            for(int j = 0; j < gridSize; j++)
+            for (int j = 0; j < gridSize; j++)
             {
                 Vector3 pos = new Vector3(tileDistance * j, 0, tileDistance * i);
-                GameObject obj = Instantiate(tilePrefab, pos, Quaternion.identity);
+                GameObject obj = Instantiate(tilePrefab, pos + transform.position, Quaternion.identity);
                 obj.name = "Tile [" + j + ", " + i + "]";
                 TileManager tile = obj.GetComponent<TileManager>();
 
@@ -44,9 +45,8 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public TileManager GetTile(int xIndex, int yIndex)
     {
-        
+        return tiles[xIndex, yIndex];
     }
 }
