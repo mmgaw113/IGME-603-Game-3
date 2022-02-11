@@ -7,8 +7,10 @@ public class TileManager : MonoBehaviour
     Dictionary<string, TileManager> tileAdj = new Dictionary<string, TileManager>();
 
     //Lists of the Dict so the keys and values can be seen in the inspector
+#if UNITY_EDITOR
     [SerializeField] List<string> keyList = new List<string>();
     [SerializeField] List<TileManager> valueList = new List<TileManager>();
+#endif
 
     // Start is called before the first frame update
     void Awake()
@@ -28,7 +30,7 @@ public class TileManager : MonoBehaviour
     public TileManager[,] ConnectTiles(TileManager[,] tileMatrix, Vector2 pos, int gridSize)
     {
         //Left Forward
-        if(pos.x > 0 && pos.y < gridSize -1)
+        if (pos.x > 0 && pos.y < gridSize - 1)
             SetConnection("LeftForward", tileMatrix[(int)pos.x - 1, (int)pos.y + 1]);
 
         //Forward
@@ -59,15 +61,15 @@ public class TileManager : MonoBehaviour
         if (pos.x > 0)
             SetConnection("Left", tileMatrix[(int)pos.x - 1, (int)pos.y]);
 
-         //Adds the dictionary keys and values to the appropriate lists
-        foreach(string key in tileAdj.Keys)
+        //Adds the dictionary keys and values to the appropriate lists
+        foreach (string key in tileAdj.Keys)
         {
             keyList.Add(key);
         }
 
-        foreach(TileManager tile in tileAdj.Values)
+        foreach (TileManager tile in tileAdj.Values)
         {
-           valueList.Add(tile);
+            valueList.Add(tile);
         }
 
         return tileMatrix;
@@ -79,10 +81,10 @@ public class TileManager : MonoBehaviour
     public void AttackTile(string direction, int range)
     {
         //Exit to the recursion or get out if there isn't a tile in that direction
-        if(range > 0 && tileAdj[direction] != null)
+        if (range > 0 && tileAdj[direction] != null)
         {
             //CODE FOR ATTACK HERE
-                        
+
             //GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             //obj.transform.position = tileAdj[direction].gameObject.transform.position;
             tileAdj[direction].AttackTile(direction, range - 1);
