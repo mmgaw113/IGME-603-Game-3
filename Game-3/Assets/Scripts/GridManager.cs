@@ -27,7 +27,7 @@ public class GridManager : MonoBehaviour
             for (int j = 0; j < gridSize; j++)
             {
                 Vector3 pos = new Vector3(tileDistance * j, 0, tileDistance * i);
-                GameObject obj = Instantiate(tilePrefab, pos, Quaternion.identity);
+                GameObject obj = Instantiate(tilePrefab, pos + transform.position, Quaternion.identity);
                 obj.name = "Tile [" + j + ", " + i + "]";
                 TileManager tile = obj.GetComponent<TileManager>();
 
