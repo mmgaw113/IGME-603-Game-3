@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class TileManager : MonoBehaviour
 {
-    Dictionary<string, TileManager> tileAdj = new Dictionary<string, TileManager>();
+    Dictionary<GridDirection, TileManager> tileAdj = new Dictionary<GridDirection, TileManager>();
 
     //Lists of the Dict so the keys and values can be seen in the inspector
 #if UNITY_EDITOR
-    [SerializeField] List<string> keyList = new List<string>();
+    [SerializeField] List<GridDirection> keyList = new List<GridDirection>();
     [SerializeField] List<TileManager> valueList = new List<TileManager>();
 #endif
 
@@ -16,14 +16,14 @@ public class TileManager : MonoBehaviour
     void Awake()
     {
         //Populate the dictionary
-        tileAdj.Add("LeftForward", null);
-        tileAdj.Add("Forward", null);
-        tileAdj.Add("RightForward", null);
-        tileAdj.Add("Right", null);
-        tileAdj.Add("RightBack", null);
-        tileAdj.Add("Back", null);
-        tileAdj.Add("LeftBack", null);
-        tileAdj.Add("Left", null);
+        tileAdj.Add(GridDirection.LeftForward, null);
+        tileAdj.Add(GridDirection.Forward, null);
+        tileAdj.Add(GridDirection.RightForward, null);
+        tileAdj.Add(GridDirection.Right, null);
+        tileAdj.Add(GridDirection.RightBack, null);
+        tileAdj.Add(GridDirection.Back, null);
+        tileAdj.Add(GridDirection.LeftBack, null);
+        tileAdj.Add(GridDirection.Left, null);
     }
 
     //Populates the dictionary
@@ -31,38 +31,39 @@ public class TileManager : MonoBehaviour
     {
         //Left Forward
         if (pos.x > 0 && pos.y < gridSize - 1)
-            SetConnection("LeftForward", tileMatrix[(int)pos.x - 1, (int)pos.y + 1]);
+            SetConnection(GridDirection.LeftForward, tileMatrix[(int)pos.x - 1, (int)pos.y + 1]);
 
         //Forward
         if (pos.y < gridSize - 1)
-            SetConnection("Forward", tileMatrix[(int)pos.x, (int)pos.y + 1]);
+            SetConnection(GridDirection.Forward, tileMatrix[(int)pos.x, (int)pos.y + 1]);
 
         //Right Forward
         if (pos.x < gridSize - 1 && pos.y < gridSize - 1)
-            SetConnection("RightForward", tileMatrix[(int)pos.x + 1, (int)pos.y + 1]);
+            SetConnection(GridDirection.RightForward, tileMatrix[(int)pos.x + 1, (int)pos.y + 1]);
 
         //Right
         if (pos.x < gridSize - 1)
-            SetConnection("Right", tileMatrix[(int)pos.x + 1, (int)pos.y]);
+            SetConnection(GridDirection.Right, tileMatrix[(int)pos.x + 1, (int)pos.y]);
 
         //Right Back
         if (pos.x < gridSize - 1 && pos.y > 0)
-            SetConnection("RightBack", tileMatrix[(int)pos.x + 1, (int)pos.y - 1]);
+            SetConnection(GridDirection.RightBack, tileMatrix[(int)pos.x + 1, (int)pos.y - 1]);
 
         //Back
         if (pos.y > 0)
-            SetConnection("Back", tileMatrix[(int)pos.x, (int)pos.y - 1]);
+            SetConnection(GridDirection.Back, tileMatrix[(int)pos.x, (int)pos.y - 1]);
 
         //Left Back
         if (pos.x > 0 && pos.y > 0)
-            SetConnection("LeftBack", tileMatrix[(int)pos.x - 1, (int)pos.y - 1]);
+            SetConnection(GridDirection.LeftBack, tileMatrix[(int)pos.x - 1, (int)pos.y - 1]);
 
         //Left
         if (pos.x > 0)
-            SetConnection("Left", tileMatrix[(int)pos.x - 1, (int)pos.y]);
+            SetConnection(GridDirection.Left, tileMatrix[(int)pos.x - 1, (int)pos.y]);
 
+#if UNITY_EDITOR
         //Adds the dictionary keys and values to the appropriate lists
-        foreach (string key in tileAdj.Keys)
+        foreach (GridDirection key in tileAdj.Keys)
         {
             keyList.Add(key);
         }
@@ -71,14 +72,15 @@ public class TileManager : MonoBehaviour
         {
             valueList.Add(tile);
         }
+#endif
 
         return tileMatrix;
     }
 
     //Helper Fnction
-    public void SetConnection(string key, TileManager tile) => tileAdj[key] = tile;
+    public void SetConnection(GridDirection key, TileManager tile) => tileAdj[key] = tile;
 
-    public void AttackTile(string direction, int range)
+    public void AttackTile(GridDirection direction, int range)
     {
         //Exit to the recursion or get out if there isn't a tile in that direction
         if (range > 0 && tileAdj[direction] != null)
