@@ -8,6 +8,7 @@ public class PlayerTurnLogic : MonoBehaviour
     [SerializeField] private Vector2Int startGridPos;
 
     private PlayerPhase phase = PlayerPhase.Inactive;
+    private TileManager startTile;
     private TileManager currentTile;
 
     private void Start()
@@ -18,7 +19,7 @@ public class PlayerTurnLogic : MonoBehaviour
                 $"Assign one in the inspector.");
         }
 
-        gridRef.GetTile(startGridPos.x, startGridPos.y);
+        startTile = currentTile = gridRef.GetTile(startGridPos.x, startGridPos.y);
     }
 
     private void Update()
@@ -38,6 +39,54 @@ public class PlayerTurnLogic : MonoBehaviour
 
     private void PlanningLogic()
     {
+        GridDirection? inputDir = GetInputDirection();
+        if (inputDir is GridDirection validDir)
+        {
+            TryMoveToAdjTile(validDir);
+        }
+    }
 
+    private GridDirection? GetInputDirection()
+    {
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            return GridDirection.Forward;
+        }
+        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            return GridDirection.Left;
+        }
+        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            return GridDirection.Back;
+        }
+        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            return GridDirection.Right;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Attempts to move to an adjacent tile in a given <paramref name="direction"/>.
+    /// </summary>
+    /// <param name="direction">The direction of the adjacent tile we want to move to.</param>
+    /// <returns>Whether there was an adjacent tile in <paramref name="direction"/>/if the move was successful.</returns>
+    private bool TryMoveToAdjTile(GridDirection direction)
+    {
+        TileManager tileInDir = currentTile.GetAdjTile(direction);
+        if (tileInDir)
+        {
+            currentTile = tileInDir;
+            transform.position = currentTile.transform.position;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

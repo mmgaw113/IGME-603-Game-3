@@ -92,4 +92,9 @@ public class TileManager : MonoBehaviour
             tileAdj[direction].AttackTile(direction, range - 1);
         }
     }
+
+    public TileManager GetAdjTile(GridDirection direction)
+    {
+        return tileAdj[direction];
+    }
 }
