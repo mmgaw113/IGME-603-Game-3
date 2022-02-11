@@ -22,7 +22,7 @@ public class PlayerTurnLogic : MonoBehaviour
         }
 
 
-        Coroutilities.DoAfterDelay(this, () => currentTile = gridRef.GetTile(startGridPos.x, startGridPos.y), Mathf.Epsilon);
+        Coroutilities.DoAfterDelayFrames(this, () => currentTile = gridRef.GetTile(startGridPos.x, startGridPos.y), 1);
     }
 
     private void SetPhase(PlayerPhase phase) => currentPhase = phase;

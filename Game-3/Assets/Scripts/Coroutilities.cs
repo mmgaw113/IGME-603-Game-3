@@ -17,8 +17,9 @@ public static class Coroutilities
     /// <param name="coroutineCaller">The <see cref="MonoBehaviour"/> that calls the coroutine.</param>
     /// <param name="thingToDo">The function or lambda expression that will be called after <paramref name="delay"/> seconds.</param>
     /// <param name="delay">How many seconds to wait before calling <paramref name="thingToDo"/>.</param>
+    /// <param name="realTime">Whether to delay in real time or scaled time.</param>
     /// <returns>The delay coroutine that was started. Use this with <c>StopCoroutine()</c> to cancel <paramref name="thingToDo"/>.</returns>
-    public static Coroutine DoAfterDelay(MonoBehaviour coroutineCaller, Action thingToDo, float delay)
+    public static Coroutine DoAfterDelay(MonoBehaviour coroutineCaller, Action thingToDo, float delay, bool realTime = false)
     {
         //If delay is too low, just call the function immediately and bail out
         if (delay <= 0)
@@ -27,11 +28,42 @@ public static class Coroutilities
             return null;
         }
         //Otherwise, start a coroutine which will call the function in delay seconds
-        return coroutineCaller.StartCoroutine(DoAfterDelay(thingToDo, delay));
+        return coroutineCaller.StartCoroutine(DoAfterDelay(thingToDo, delay, realTime));
     }
-    private static IEnumerator DoAfterDelay(Action thingToDo, float delay)
+    private static IEnumerator DoAfterDelay(Action thingToDo, float delay, bool realTime = false)
     {
-        yield return new WaitForSeconds(delay);
+        if (realTime) { yield return new WaitForSecondsRealtime(delay); }
+        else { yield return new WaitForSeconds(delay); }
+
+        thingToDo();
+    }
+
+    /// <summary>
+    /// Calls the function <paramref name="thingToDo"/> after a given number of <paramref name="frames"/>.<br/>
+    /// <i>(<paramref name="coroutineCaller"/> is needed to call the coroutine, since <c>StartCoroutine()</c> is a MonoBehavior 
+    /// function, and MonoBehaviours cannot be static.)</i>
+    /// </summary>
+    /// <param name="coroutineCaller">The <see cref="MonoBehaviour"/> that calls the coroutine.</param>
+    /// <param name="thingToDo">The function or lambda expression that will be called after <paramref name="delay"/> seconds.</param>
+    /// <param name="frames">How many frames to wait before calling <paramref name="thingToDo"/>.</param>
+    /// <returns>The delay coroutine that was started. Use this with <c>StopCoroutine()</c> to cancel <paramref name="thingToDo"/>.</returns>
+    public static Coroutine DoAfterDelayFrames(MonoBehaviour coroutineCaller, Action thingToDo, int frames)
+    {
+        //If delay is too low, just call the function immediately and bail out
+        if (frames <= 0)
+        {
+            thingToDo();
+            return null;
+        }
+        //Otherwise, start a coroutine which will call the function in delay seconds
+        return coroutineCaller.StartCoroutine(DoAfterDelayFrames(thingToDo, frames));
+    }
+    private static IEnumerator DoAfterDelayFrames(Action thingToDo, int frames)
+    {
+        for (int i = 0; i < frames; i++)
+        {
+            yield return null;
+        }
         thingToDo();
     }
 
