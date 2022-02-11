@@ -501,6 +501,7 @@ MonoBehaviour:
   gridRef: {fileID: 1166101292}
   startGridPos: {x: 0, y: 0}
   offset: {x: 0, y: 1, z: 0}
+  actionsAllowed: 5
 --- !u!1 &2082518470
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,10 +8,12 @@ public class PlayerTurnLogic : MonoBehaviour
     [SerializeField] private Vector2Int startGridPos;
     [Tooltip("The player will move to the transforms of grid tiles, plus this offset.")]
     [SerializeField] private Vector3 offset;
+    [SerializeField] [Min(1)] private int actionsAllowed;
 
     private PlayerPhase currentPhase = PlayerPhase.Planning;
     private TileManager startTile;
     private TileManager currentTile;
+    private int actionsTaken;
 
     private void Start()
     {
@@ -22,7 +24,7 @@ public class PlayerTurnLogic : MonoBehaviour
         }
 
 
-        Coroutilities.DoAfterDelayFrames(this, () => currentTile = gridRef.GetTile(startGridPos.x, startGridPos.y), 1);
+        Coroutilities.DoAfterDelayFrames(this, () => startTile = currentTile = gridRef.GetTile(startGridPos.x, startGridPos.y), 1);
     }
 
     private void SetPhase(PlayerPhase phase) => currentPhase = phase;
@@ -44,10 +46,25 @@ public class PlayerTurnLogic : MonoBehaviour
 
     private void PlanningLogic()
     {
-        GridDirection? inputDir = GetInputDirection();
-        if (inputDir is GridDirection validDir)
+        if (actionsTaken < actionsAllowed)
         {
-            TryMoveToAdjTile(validDir);
+            GridDirection? inputDir = GetInputDirection();
+            if (inputDir is GridDirection validDir)
+            {
+                if (TryMoveToAdjTile(validDir))
+                {
+                    actionsTaken++;
+                    Debug.Log($"{gameObject.name} successfully moved. " +
+                        $"Actions taken: {actionsTaken}. Actions left: {actionsAllowed - actionsTaken}.");
+                }
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            transform.position = startTile.transform.position + offset;
+            currentTile = startTile;
+            actionsTaken = 0;
+            Debug.Log($"{gameObject.name} reset! Actions replenished.");
         }
     }
 
