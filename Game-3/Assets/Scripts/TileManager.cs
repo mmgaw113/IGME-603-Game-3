@@ -6,6 +6,10 @@ public class TileManager : MonoBehaviour
 {
     Dictionary<string, TileManager> tileAdj = new Dictionary<string, TileManager>();
 
+    //Lists of the Dict so the keys and values can be seen in the inspector
+    [SerializeField] List<string> keyList = new List<string>();
+    [SerializeField] List<TileManager> valueList = new List<TileManager>();
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -20,11 +24,9 @@ public class TileManager : MonoBehaviour
         tileAdj.Add("Left", null);
     }
 
-    //Need the tile matrix, need the position
+    //Populates the dictionary
     public TileManager[,] ConnectTiles(TileManager[,] tileMatrix, Vector2 pos, int gridSize)
     {
-        Debug.Log(pos);
-
         //Left Forward
         if(pos.x > 0 && pos.y < gridSize -1)
             SetConnection("LeftForward", tileMatrix[(int)pos.x - 1, (int)pos.y + 1]);
@@ -57,23 +59,32 @@ public class TileManager : MonoBehaviour
         if (pos.x > 0)
             SetConnection("Left", tileMatrix[(int)pos.x - 1, (int)pos.y]);
 
+         //Adds the dictionary keys and values to the appropriate lists
+        foreach(string key in tileAdj.Keys)
+        {
+            keyList.Add(key);
+        }
+
+        foreach(TileManager tile in tileAdj.Values)
+        {
+           valueList.Add(tile);
+        }
+
         return tileMatrix;
     }
 
-    public void SetConnection(string key, TileManager tile)
-    {      
-        tileAdj[key] = tile;
-        Debug.Log(key);
-        Debug.Log(tileAdj[key]);
-    }
+    //Helper Fnction
+    public void SetConnection(string key, TileManager tile) => tileAdj[key] = tile;
 
     public void AttackTile(string direction, int range)
     {
-        //Exit to the recursion
-        if(range > 0)
+        //Exit to the recursion or get out if there isn't a tile in that direction
+        if(range > 0 && tileAdj[direction] != null)
         {
-            //Code for attack
-            Debug.Log(tileAdj[direction].gameObject.transform.position);
+            //CODE FOR ATTACK HERE
+                        
+            //GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            //obj.transform.position = tileAdj[direction].gameObject.transform.position;
             tileAdj[direction].AttackTile(direction, range - 1);
         }
     }
