@@ -6,8 +6,10 @@ public class PlayerTurnLogic : MonoBehaviour
 {
     [SerializeField] private GridManager gridRef = null;
     [SerializeField] private Vector2Int startGridPos;
+    [Tooltip("The player will move to the transforms of grid tiles, plus this offset.")]
+    [SerializeField] private Vector3 offset;
 
-    private PlayerPhase phase = PlayerPhase.Inactive;
+    private PlayerPhase currentPhase = PlayerPhase.Planning;
     private TileManager startTile;
     private TileManager currentTile;
 
@@ -19,12 +21,15 @@ public class PlayerTurnLogic : MonoBehaviour
                 $"Assign one in the inspector.");
         }
 
-        startTile = currentTile = gridRef.GetTile(startGridPos.x, startGridPos.y);
+
+        Coroutilities.DoAfterDelay(this, () => currentTile = gridRef.GetTile(startGridPos.x, startGridPos.y), Mathf.Epsilon);
     }
+
+    private void SetPhase(PlayerPhase phase) => currentPhase = phase;
 
     private void Update()
     {
-        switch (phase)
+        switch (currentPhase)
         {
             case PlayerPhase.Planning:
                 PlanningLogic();
@@ -81,7 +86,7 @@ public class PlayerTurnLogic : MonoBehaviour
         if (tileInDir)
         {
             currentTile = tileInDir;
-            transform.position = currentTile.transform.position;
+            transform.position = currentTile.transform.position + offset;
             return true;
         }
         else
