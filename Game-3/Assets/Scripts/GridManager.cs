@@ -13,7 +13,6 @@ public class GridManager : MonoBehaviour
     [SerializeField] GameObject tilePrefab;
     TileManager[,] tiles;
 
-    // Start is called before the first frame update
     void Start()
     {
         tiles = new TileManager[gridSize, gridSize];
@@ -46,9 +45,8 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public TileManager GetTile(int xIndex, int yIndex)
     {
-
+        return tiles[xIndex, yIndex];
     }
 }
