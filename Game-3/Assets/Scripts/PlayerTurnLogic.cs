@@ -63,10 +63,7 @@ public class PlayerTurnLogic : MonoBehaviour
         //TODO: Remove/rework/double check once the game logic is more complete.
         else if (Input.GetKeyDown(KeyCode.R))
         {
-            transform.position = startTile.transform.position + offset;
-            currentTile = startTile;
-            actionsTaken = 0;
-            Debug.Log($"{gameObject.name} reset! Actions replenished.");
+            ResetPos();
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -74,6 +71,14 @@ public class PlayerTurnLogic : MonoBehaviour
             Debug.Log($"Ended {gameObject.name}'s turn.");
             turnManger.EndTurn();
         }
+    }
+
+    public void ResetPos()
+    {
+        transform.position = startTile.transform.position + offset;
+        currentTile = startTile;
+        actionsTaken = 0;
+        Debug.Log($"{gameObject.name} reset! Actions replenished.");
     }
 
     private GridDirection? GetInputDirection()

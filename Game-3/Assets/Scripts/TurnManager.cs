@@ -75,8 +75,14 @@ public class TurnManager : MonoBehaviour
     public void EndTurn()
     {
         if (gameState == GameState.Player1Turn)
-            ChangeGameStateUpdate(GameState.Player2Turn);
+        {
+            play1Turn.ResetPos();
+            ChangeGameStateUpdate(GameState.Player2Turn);            
+        }
         else if (gameState == GameState.Player2Turn)
+        {
+            play2Turn.ResetPos();
             ChangeGameStateUpdate(GameState.Automation);
+        }          
     }
 }
