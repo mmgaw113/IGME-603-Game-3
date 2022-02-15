@@ -66,9 +66,27 @@ public class PlayerTurnLogic : MonoBehaviour
             ResetPos();
         }
 
+
+        // x attack
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log($"Ended {gameObject.name}'s turn.");
+            Debug.Log($"Ended {gameObject.name}'s turn with x attack");
+
+            currentTile.AttackTile(GridDirection.LeftBack, 1);
+            currentTile.AttackTile(GridDirection.LeftForward, 1);
+            currentTile.AttackTile(GridDirection.RightBack, 1);
+            currentTile.AttackTile(GridDirection.RightForward, 1);
+
+            turnManger.EndTurn();
+        }
+        //+ attack
+        else if(Input.GetKeyDown(KeyCode.Q))
+        {
+            Debug.Log($"Ended {gameObject.name}'s turn with + attack");
+            currentTile.AttackTile(GridDirection.Left, 1);
+            currentTile.AttackTile(GridDirection.Back, 1);
+            currentTile.AttackTile(GridDirection.Right, 1);
+            currentTile.AttackTile(GridDirection.Forward, 1);
             turnManger.EndTurn();
         }
     }
