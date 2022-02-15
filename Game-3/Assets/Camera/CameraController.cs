@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
         {
             if(transposerSettings.m_FollowOffset.y != cameraDistance)
             {
-                transposerSettings.m_FollowOffset = new Vector3(0f, cameraDistance, 0f);
+                transposerSettings.m_FollowOffset = new Vector3(0f, cameraDistance, cameraDistance / 2f );
             }
 
             transposerSettings.m_XDamping = damperSpeed.x;

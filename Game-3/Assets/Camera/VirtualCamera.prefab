@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1076170164809227308}
   - component: {fileID: 1076170164809227475}
   - component: {fileID: 1076170164809227474}
-  - component: {fileID: 1076170164809227309}
+  - component: {fileID: 889482853}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
---- !u!114 &1076170164809227309
+--- !u!114 &889482853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 20, z: 0}
+  m_FollowOffset: {x: 0, y: 0, z: -10}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -119,14 +119,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1076170165912521995}
-  m_LocalRotation: {x: 0.70090926, y: -2.1758655e-14, z: 2.1382173e-14, w: 0.71325046}
+  m_LocalRotation: {x: 0.70090926, y: 0, z: 0, w: 0.71325046}
   m_LocalPosition: {x: 0, y: 20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1076170164809227308}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 89, y: 0, z: 0}
 --- !u!114 &1076170165912521992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,4 +174,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0c7ae43fca3214d8a95ca8de8011b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraDistance: 20
+  cameraDistance: 15
+  damperSpeed: {x: 0, y: 0, z: 1}
