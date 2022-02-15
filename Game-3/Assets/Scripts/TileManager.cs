@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,8 @@ public class TileManager : MonoBehaviour
     [SerializeField] List<TileManager> valueList = new List<TileManager>();
 #endif
 
-    // Start is called before the first frame update
+    public static Action<TileManager> tileAttacked;
+
     void Awake()
     {
         //Populate the dictionary
@@ -86,6 +88,7 @@ public class TileManager : MonoBehaviour
         if (range > 0 && tileAdj[direction] != null)
         {
             //CODE FOR ATTACK HERE
+            tileAttacked?.Invoke(this);
 
             //GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             //obj.transform.position = tileAdj[direction].gameObject.transform.position;
