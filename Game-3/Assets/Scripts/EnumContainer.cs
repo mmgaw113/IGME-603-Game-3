@@ -27,3 +27,10 @@ public enum GameState
    Player2Turn,
     Automation
 }
+
+public enum ActionType
+{
+    Move,
+    Attack,
+    Stay
+}
