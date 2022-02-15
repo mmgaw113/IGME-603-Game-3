@@ -10,9 +10,10 @@ public class PlayerTurnLogic : MonoBehaviour
     [SerializeField] private Vector3 offset;
     [SerializeField] [Min(1)] private int actionsAllowed;
 
-    private PlayerPhase currentPhase = PlayerPhase.Planning;
+    private PlayerPhase currentPhase; //= PlayerPhase.Planning;
     private TileManager startTile;
     private TileManager currentTile;
+    public TurnManager turnManger;
     private int actionsTaken;
 
     private void Start()
@@ -27,7 +28,7 @@ public class PlayerTurnLogic : MonoBehaviour
         Coroutilities.DoAfterDelayFrames(this, () => startTile = currentTile = gridRef.GetTile(startGridPos.x, startGridPos.y), 1);
     }
 
-    private void SetPhase(PlayerPhase phase) => currentPhase = phase;
+    public void SetPhase(PlayerPhase phase) => currentPhase = phase;
 
     private void Update()
     {
@@ -66,6 +67,12 @@ public class PlayerTurnLogic : MonoBehaviour
             currentTile = startTile;
             actionsTaken = 0;
             Debug.Log($"{gameObject.name} reset! Actions replenished.");
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log($"Ended {gameObject.name}'s turn.");
+            turnManger.EndTurn();
         }
     }
 
