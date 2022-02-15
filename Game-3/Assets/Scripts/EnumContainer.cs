@@ -20,3 +20,10 @@ public enum PlayerPhase
     Planning,
     Automated
 }
+
+public enum GameState
+{
+    Player1Turn,
+   Player2Turn,
+    Automation
+}

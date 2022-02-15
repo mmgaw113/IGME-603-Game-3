@@ -180,6 +180,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
+--- !u!1 &271071037 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1261143276920980357, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
+  m_PrefabInstance: {fileID: 9009958}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &271071038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271071037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 496611fa147d82d4ea7d240549d4f088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridRef: {fileID: 1166101292}
+  startGridPos: {x: 4, y: 4}
+  offset: {x: 0, y: 0, z: 0}
+  actionsAllowed: 5
+  turnManger: {fileID: 2093356642}
 --- !u!1 &577263044
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,6 +723,7 @@ MonoBehaviour:
   startGridPos: {x: 0, y: 0}
   offset: {x: 0, y: 1, z: 0}
   actionsAllowed: 5
+  turnManger: {fileID: 2093356642}
 --- !u!1 &2082518470
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,6 +830,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2093356640}
   - component: {fileID: 2093356641}
+  - component: {fileID: 2093356642}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -835,9 +859,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2093356639}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac1078e262a1cb14385bb72c41e1a3e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraController: {fileID: 1434951619}
+  player1: {fileID: 2069127946}
+  player2: {fileID: 2033484120}
+--- !u!114 &2093356642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093356639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b3a2e846f2cf624089538b7a2431e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cameraController: {fileID: 1434951619}
