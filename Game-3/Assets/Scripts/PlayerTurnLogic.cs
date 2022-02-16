@@ -38,6 +38,7 @@ public class PlayerTurnLogic : MonoBehaviour
                 PlanningLogic();
                 break;
             case PlayerPhase.Automated:
+                AutomatedLogic();
                 break;
             case PlayerPhase.Inactive:
             default:
@@ -60,36 +61,34 @@ public class PlayerTurnLogic : MonoBehaviour
                 }
             }
         }
-        //TODO: Remove/rework/double check once the game logic is more complete.
         else if (Input.GetKeyDown(KeyCode.R))
         {
             ResetPos();
         }
 
-
-        // x attack
+        //x attack
         if (Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log($"Ended {gameObject.name}'s turn with x attack");
-
-            currentTile.AttackTile(GridDirection.LeftBack, 1);
-            currentTile.AttackTile(GridDirection.LeftForward, 1);
-            currentTile.AttackTile(GridDirection.RightBack, 1);
-            currentTile.AttackTile(GridDirection.RightForward, 1);
-
+            currentTile.AttackDiagonal(1);
             turnManger.EndTurn();
         }
         //+ attack
-        else if(Input.GetKeyDown(KeyCode.Q))
+        else if (Input.GetKeyDown(KeyCode.Q))
         {
             Debug.Log($"Ended {gameObject.name}'s turn with + attack");
-            currentTile.AttackTile(GridDirection.Left, 1);
-            currentTile.AttackTile(GridDirection.Back, 1);
-            currentTile.AttackTile(GridDirection.Right, 1);
-            currentTile.AttackTile(GridDirection.Forward, 1);
+            currentTile.AttackOrthogonal(1);
             turnManger.EndTurn();
         }
     }
+
+    private void AutomatedLogic()
+    {
+        //Move automatically through the moves made during planning phase. Short delay between each move. Stay sync'd with
+        //  other player, perhaps using a common time step, or an "automation step complete" action.
+    }
+
+    //  Helper Functions  //
 
     public void ResetPos()
     {
