@@ -14,6 +14,16 @@ public class TurnManager : MonoBehaviour
 
     private GamePhase currentGamePhase;
 
+    private void OnEnable()
+    {
+        PlayerTurnLogic.endTurn += OnPlayerEndTurn;
+    }
+    private void OnDisable()
+    {
+        PlayerTurnLogic.endTurn -= OnPlayerEndTurn;
+    }
+    private void OnPlayerEndTurn(PlayerTurnLogic enderOfTurn) { EndTurn(); }
+
     private void Start()
     {
         InitializePlayers();

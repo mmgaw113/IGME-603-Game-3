@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,11 +11,12 @@ public class PlayerTurnLogic : MonoBehaviour
     [SerializeField] private Vector3 offset;
     [SerializeField] [Min(1)] private int actionsAllowed;
 
-    private PlayerPhase currentPhase; //= PlayerPhase.Planning;
+    private PlayerPhase currentPhase;
     private TileManager startTile;
     private TileManager currentTile;
-    public TurnManager turnManger;
     private int actionsTaken;
+
+    public static Action<PlayerTurnLogic> endTurn;
 
     private void Start()
     {
@@ -71,14 +73,14 @@ public class PlayerTurnLogic : MonoBehaviour
         {
             Debug.Log($"Ended {gameObject.name}'s turn with x attack");
             currentTile.AttackDiagonal(1);
-            turnManger.EndTurn();
+            endTurn?.Invoke(this);
         }
         //+ attack
         else if (Input.GetKeyDown(KeyCode.Q))
         {
             Debug.Log($"Ended {gameObject.name}'s turn with + attack");
             currentTile.AttackOrthogonal(1);
-            turnManger.EndTurn();
+            endTurn?.Invoke(this);
         }
     }
 
