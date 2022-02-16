@@ -15,6 +15,7 @@ public class PlayerTurnLogic : MonoBehaviour
     private TileManager startTile;
     private TileManager currentTile;
     private int actionsTaken;
+    private LinkedList<GridDirection> movesPlanned;
 
     public static Action<PlayerTurnLogic> endTurn;
 
@@ -26,7 +27,7 @@ public class PlayerTurnLogic : MonoBehaviour
                 $"Assign one in the inspector.");
         }
 
-
+        movesPlanned = new LinkedList<GridDirection>();
         Coroutilities.DoAfterDelayFrames(this, () => startTile = currentTile = gridRef.GetTile(startGridPos.x, startGridPos.y), 1);
     }
 
@@ -58,6 +59,7 @@ public class PlayerTurnLogic : MonoBehaviour
                 if (TryMoveToAdjTile(validDir))
                 {
                     actionsTaken++;
+                    movesPlanned.AddLast(validDir);
                     Debug.Log($"{gameObject.name} successfully moved. " +
                         $"Actions taken: {actionsTaken}. Actions left: {actionsAllowed - actionsTaken}.");
                 }
@@ -88,6 +90,7 @@ public class PlayerTurnLogic : MonoBehaviour
     {
         //Move automatically through the moves made during planning phase. Short delay between each move. Stay sync'd with
         //  other player, perhaps using a common time step, or an "automation step complete" action.
+        //Use movesPlanned and repeatedly get/remove first until it's empty.
     }
 
     //  Helper Functions  //
@@ -97,6 +100,7 @@ public class PlayerTurnLogic : MonoBehaviour
         transform.position = startTile.transform.position + offset;
         currentTile = startTile;
         actionsTaken = 0;
+        movesPlanned.Clear();
         Debug.Log($"{gameObject.name} reset! Actions replenished.");
     }
 
