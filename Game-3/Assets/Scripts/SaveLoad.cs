@@ -8,6 +8,7 @@ public class SaveLoad : MonoBehaviour
     {
         SaveSystem.SavePlayer(player1);
         SaveSystem.SavePlayer(player2);
+        Debug.Log("Saved");
     }
     public void LoadPlayer()
     {
@@ -18,12 +19,15 @@ public class SaveLoad : MonoBehaviour
 
         Vector3 p1Spawn;
         Vector3 p2Spawn;
+        Debug.Log(data.p1Position);
         p1Spawn.x = data.p1Position[0];
+        //Debug.Log(p1Spawn.x);
         p1Spawn.y = data.p1Position[1];
         p1Spawn.z = data.p1Position[2];
 
         p2Spawn.x = data.p2Position[0];
         p2Spawn.y = data.p2Position[1];
         p2Spawn.z = data.p2Position[2];
+        Debug.Log("Loaded");
     }
 }

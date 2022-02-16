@@ -5,15 +5,9 @@ using UnityEngine;
 public class Player1 : MonoBehaviour
 {
     public int health = 3;
-    // Start is called before the first frame update
-    void Start()
+    public Transform playerPosition;
+    private void Update()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Debug.Log(transform.position.x);
     }
 }
