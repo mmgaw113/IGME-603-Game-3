@@ -96,6 +96,21 @@ public class TileManager : MonoBehaviour
         }
     }
 
+    public void AttackOrthogonal(int range)
+    {
+        AttackTile(GridDirection.Left, range);
+        AttackTile(GridDirection.Back, range);
+        AttackTile(GridDirection.Right, range);
+        AttackTile(GridDirection.Forward, range);
+    }
+    public void AttackDiagonal(int range)
+    {
+        AttackTile(GridDirection.LeftBack, range);
+        AttackTile(GridDirection.LeftForward, range);
+        AttackTile(GridDirection.RightBack, range);
+        AttackTile(GridDirection.RightForward, range);
+    }
+
     public TileManager GetAdjTile(GridDirection direction)
     {
         return tileAdj[direction];
