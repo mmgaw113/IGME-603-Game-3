@@ -12,19 +12,11 @@ public class TurnManager : MonoBehaviour
     private PlayerTurnLogic play1Turn;
     private PlayerTurnLogic play2Turn;
 
-    private bool player1Active = true;
+    private GamePhase currentGamePhase;
 
-    GameState gameState;
-
-    // Update is called once per frame
     private void Start()
     {
         InitializePlayers();
-    }
-
-    void Update()
-    {
-
     }
 
     /// <summary>
@@ -36,15 +28,15 @@ public class TurnManager : MonoBehaviour
         play1Turn = player1.GetComponent<PlayerTurnLogic>();
         play2Turn = player2.GetComponent<PlayerTurnLogic>();
 
-        ChangeGameStateUpdate(GameState.Player1Turn);
+        InitPhase(GamePhase.Player1Planning);
     }
 
-    public void ChangeGameStateUpdate(GameState state)
+    public void InitPhase(GamePhase phase)
     {
-        switch (state)
+        switch (phase)
         {
-            case GameState.Player1Turn:
-                gameState = GameState.Player1Turn;
+            case GamePhase.Player1Planning:
+                currentGamePhase = GamePhase.Player1Planning;
 
                 cameraController.SetFollowLookAtTarget(player1, player1);
 
@@ -52,8 +44,8 @@ public class TurnManager : MonoBehaviour
                 play2Turn.SetPhase(PlayerPhase.Inactive);
                 break;
 
-            case GameState.Player2Turn:
-                gameState = GameState.Player2Turn;
+            case GamePhase.Player2Planning:
+                currentGamePhase = GamePhase.Player2Planning;
 
                 cameraController.SetFollowLookAtTarget(player2, player2);
 
@@ -61,8 +53,8 @@ public class TurnManager : MonoBehaviour
                 play2Turn.SetPhase(PlayerPhase.Planning);
                 break;
 
-            case GameState.Automation:
-                gameState = GameState.Automation;
+            case GamePhase.PlanResolution:
+                currentGamePhase = GamePhase.PlanResolution;
 
                 cameraController.SetFollowLookAtTarget(player2, player2);
 
@@ -74,15 +66,15 @@ public class TurnManager : MonoBehaviour
 
     public void EndTurn()
     {
-        if (gameState == GameState.Player1Turn)
+        if (currentGamePhase == GamePhase.Player1Planning)
         {
             play1Turn.ResetPos();
-            ChangeGameStateUpdate(GameState.Player2Turn);            
+            InitPhase(GamePhase.Player2Planning);
         }
-        else if (gameState == GameState.Player2Turn)
+        else if (currentGamePhase == GamePhase.Player2Planning)
         {
             play2Turn.ResetPos();
-            ChangeGameStateUpdate(GameState.Automation);
-        }          
+            InitPhase(GamePhase.PlanResolution);
+        }
     }
 }

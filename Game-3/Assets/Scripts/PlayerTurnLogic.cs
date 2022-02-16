@@ -38,6 +38,7 @@ public class PlayerTurnLogic : MonoBehaviour
                 PlanningLogic();
                 break;
             case PlayerPhase.Automated:
+                AutomatedLogic();
                 break;
             case PlayerPhase.Inactive:
             default:
@@ -60,13 +61,12 @@ public class PlayerTurnLogic : MonoBehaviour
                 }
             }
         }
-        //TODO: Remove/rework/double check once the game logic is more complete.
         else if (Input.GetKeyDown(KeyCode.R))
         {
             ResetPos();
         }
 
-        // x attack
+        //x attack
         if (Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log($"Ended {gameObject.name}'s turn with x attack");
@@ -81,6 +81,14 @@ public class PlayerTurnLogic : MonoBehaviour
             turnManger.EndTurn();
         }
     }
+
+    private void AutomatedLogic()
+    {
+        //Move automatically through the moves made during planning phase. Short delay between each move. Stay sync'd with
+        //  other player, perhaps using a common time step, or an "automation step complete" action.
+    }
+
+    //  Helper Functions  //
 
     public void ResetPos()
     {
