@@ -15,15 +15,15 @@ public static class SaveSystem
         formatter.Serialize(stream, data1);
         stream.Close();
     }
-    public static void SavePlayer(Player2 player2)
+    public static void SavePlayer(Player3 player2)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/game.wow";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        PlayerData data1 = new PlayerData(player2);
+        PlayerData data = new PlayerData(player2);
 
-        formatter.Serialize(stream, data1);
+        formatter.Serialize(stream, data);
         stream.Close();
     }
     public static PlayerData LoadPlayer()

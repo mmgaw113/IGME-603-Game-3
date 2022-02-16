@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class GameData : MonoBehaviour
 {
-    public int round = 3;
+    public int round;
 }

@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -569730072069470878, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
+      propertyPath: turnNumber
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1261143276920980357, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
       propertyPath: m_Name
       value: Player 2
@@ -180,6 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7133052881207880346, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
+    - {fileID: -569730072069470878, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
 --- !u!1 &271071037 stripped
 GameObject:
@@ -203,17 +208,20 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: 0}
   actionsAllowed: 5
   turnManger: {fileID: 2093356642}
---- !u!114 &271071039 stripped
+--- !u!114 &271071039
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -569730072069470878, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
-  m_PrefabInstance: {fileID: 9009958}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 271071037}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2470e59e9fdc4f4d85c46e37d4dea39, type: 3}
+  m_Script: {fileID: 11500000, guid: cf7a352af9891e84ca13ff541c58e847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
+  turnNumber: 1
 --- !u!1 &577263044
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,6 +809,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8822539596510111079, guid: fa8749db628148341af68e233c60f267, type: 3}
+      propertyPath: health
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8822539596510111079, guid: fa8749db628148341af68e233c60f267, type: 3}
+      propertyPath: turnNumber
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1261143276920980357, guid: fa8749db628148341af68e233c60f267, type: 3}
       propertyPath: m_Name
       value: Player 1
@@ -1127,7 +1143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1692,7 +1708,6 @@ GameObject:
   - component: {fileID: 2093356641}
   - component: {fileID: 2093356642}
   - component: {fileID: 2093356644}
-  - component: {fileID: 2093356643}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -1744,19 +1759,6 @@ MonoBehaviour:
   cameraController: {fileID: 1434951619}
   player1: {fileID: 2069127946}
   player2: {fileID: 2033484120}
---- !u!114 &2093356643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2093356639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c4914fc800ed9f4ebd3dec5c6347bd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  round: 3
 --- !u!114 &2093356644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1770,5 +1772,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player1: {fileID: 2069127942}
-  player2: {fileID: 271071039}
-  gameData: {fileID: 2093356643}
+  player2: {fileID: 0}
