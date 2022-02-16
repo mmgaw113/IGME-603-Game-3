@@ -27,3 +27,16 @@ public enum GamePhase
     Player2Planning,
     PlanResolution
 }
+
+public enum ActionType
+{
+    Move,
+    Attack,
+    Stay
+}
+
+public enum AttackType
+{
+    XAttack,
+    PlusAttack
+}
