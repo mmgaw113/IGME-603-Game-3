@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1076170164809227308}
   - component: {fileID: 1076170164809227475}
   - component: {fileID: 1076170164809227474}
-  - component: {fileID: 889482853}
+  - component: {fileID: 1042820529}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -61,8 +61,8 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0.5
-  m_VerticalDamping: 0.5
+  m_HorizontalDamping: 0
+  m_VerticalDamping: 0
   m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_DeadZoneWidth: 0
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
---- !u!114 &889482853
+--- !u!114 &1042820529
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,4 +175,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraDistance: 15
-  damperSpeed: {x: 0, y: 0, z: 1}
+  damperSpeed: {x: 1, y: 0.5, z: 1}
