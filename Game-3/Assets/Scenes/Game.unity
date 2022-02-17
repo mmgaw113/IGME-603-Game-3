@@ -826,9 +826,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'WASD or Arrow keys to move. Q or E to attack and end turn
-
-'
+  m_Text: WASD or Arrow keys to move. Q (+) or E (x) to attack and end turn.
 --- !u!222 &1320271282
 CanvasRenderer:
   m_ObjectHideFlags: 0
