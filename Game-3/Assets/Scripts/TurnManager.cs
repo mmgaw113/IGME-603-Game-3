@@ -8,11 +8,13 @@ public class TurnManager : MonoBehaviour
 
     public Transform player1;
     public Transform player2;
+    public Transform autoCamFocus;
 
     private PlayerTurnLogic play1Turn;
     private PlayerTurnLogic play2Turn;
 
     private GamePhase currentGamePhase;
+
 
     private void OnEnable()
     {
@@ -27,6 +29,11 @@ public class TurnManager : MonoBehaviour
     private void Start()
     {
         InitializePlayers();
+    }
+
+    private void Update()
+    {
+        TestEndofResolution();
     }
 
     /// <summary>
@@ -66,7 +73,7 @@ public class TurnManager : MonoBehaviour
             case GamePhase.PlanResolution:
                 currentGamePhase = GamePhase.PlanResolution;
 
-                cameraController.SetFollowLookAtTarget(player2, player2);
+                cameraController.SetFollowLookAtTarget(autoCamFocus, autoCamFocus);
 
                 play1Turn.SetPhase(PlayerPhase.Automated);
                 play2Turn.SetPhase(PlayerPhase.Automated);
@@ -86,5 +93,17 @@ public class TurnManager : MonoBehaviour
             play2Turn.ResetPos();
             InitPhase(GamePhase.PlanResolution);
         }
+    }
+
+    public void TestEndofResolution()
+    {
+        if(play1Turn.automationEnd == true && play2Turn.automationEnd == true)
+        {
+            play1Turn.automationEnd = false;
+            play2Turn.automationEnd = false;
+
+            InitPhase(GamePhase.Player1Planning);
+        }
+        
     }
 }

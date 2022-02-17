@@ -12,10 +12,13 @@ public class PlayerTurnLogic : MonoBehaviour
     [SerializeField] [Min(1)] private int actionsAllowed;
 
     private PlayerPhase currentPhase;
-    private TileManager startTile;
-    private TileManager currentTile;
+    [SerializeField] private TileManager startTile;
+    [SerializeField] private TileManager currentTile;
     private int actionsTaken;
     private LinkedList<GridDirection> movesPlanned;
+    private LinkedListNode<GridDirection> node = null;
+
+    [HideInInspector] public bool automationEnd = false;
 
     public static Action<PlayerTurnLogic> endTurn;
 
@@ -23,8 +26,8 @@ public class PlayerTurnLogic : MonoBehaviour
     {
         if (!gridRef)
         {
-            Debug.LogError($"{gameObject.name}'s turn logic was not given a grid to reference! " +
-                $"Assign one in the inspector.");
+           // Debug.LogError($"{gameObject.name}'s turn logic was not given a grid to reference! " +
+            //    $"Assign one in the inspector.");
         }
 
         movesPlanned = new LinkedList<GridDirection>();
@@ -40,7 +43,7 @@ public class PlayerTurnLogic : MonoBehaviour
             case PlayerPhase.Planning:
                 PlanningLogic();
                 break;
-            case PlayerPhase.Automated:
+            case PlayerPhase.Automated:             
                 AutomatedLogic();
                 break;
             case PlayerPhase.Inactive:
@@ -60,8 +63,8 @@ public class PlayerTurnLogic : MonoBehaviour
                 {
                     actionsTaken++;
                     movesPlanned.AddLast(validDir);
-                    Debug.Log($"{gameObject.name} successfully moved. " +
-                        $"Actions taken: {actionsTaken}. Actions left: {actionsAllowed - actionsTaken}.");
+                  //  Debug.Log($"{gameObject.name} successfully moved. " +
+                    //    $"Actions taken: {actionsTaken}. Actions left: {actionsAllowed - actionsTaken}.");
                 }
             }
         }
@@ -73,14 +76,14 @@ public class PlayerTurnLogic : MonoBehaviour
         //x attack
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log($"Ended {gameObject.name}'s turn with x attack");
+           // Debug.Log($"Ended {gameObject.name}'s turn with x attack");
             currentTile.AttackDiagonal(1);
             endTurn?.Invoke(this);
         }
         //+ attack
         else if (Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log($"Ended {gameObject.name}'s turn with + attack");
+           // Debug.Log($"Ended {gameObject.name}'s turn with + attack");
             currentTile.AttackOrthogonal(1);
             endTurn?.Invoke(this);
         }
@@ -91,6 +94,24 @@ public class PlayerTurnLogic : MonoBehaviour
         //Move automatically through the moves made during planning phase. Short delay between each move. Stay sync'd with
         //  other player, perhaps using a common time step, or an "automation step complete" action.
         //Use movesPlanned and repeatedly get/remove first until it's empty.
+
+        //Debug.Log(movesPlanned.Count);
+
+        if (!automationEnd)
+        {
+
+            foreach (GridDirection value in movesPlanned)
+            {
+                Coroutilities.DoAfterDelay(this, () => { TryMoveToAdjTile(value); startTile = currentTile;}, 1.0f, true);
+                //Debug.Log(value);
+            }
+            
+            automationEnd = true;
+            movesPlanned.Clear();
+        }
+       
+
+        
     }
 
     //  Helper Functions  //
@@ -100,8 +121,8 @@ public class PlayerTurnLogic : MonoBehaviour
         transform.position = startTile.transform.position + offset;
         currentTile = startTile;
         actionsTaken = 0;
-        movesPlanned.Clear();
-        Debug.Log($"{gameObject.name} reset! Actions replenished.");
+        //movesPlanned.Clear();
+       // Debug.Log($"{gameObject.name} reset! Actions replenished.");
     }
 
     private GridDirection? GetInputDirection()

@@ -201,7 +201,6 @@ MonoBehaviour:
   startGridPos: {x: 4, y: 4}
   offset: {x: 0, y: 0, z: 0}
   actionsAllowed: 5
-  turnManger: {fileID: 2093356642}
 --- !u!1 &577263044
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +353,36 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &743918851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 743918852}
+  m_Layer: 0
+  m_Name: AutomatedCameraFocus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &743918852
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743918851}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.89, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &889482851 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1076170164809227311, guid: c2490878638c331479fdc720ca72961a, type: 3}
@@ -723,7 +752,6 @@ MonoBehaviour:
   startGridPos: {x: 0, y: 0}
   offset: {x: 0, y: 1, z: 0}
   actionsAllowed: 5
-  turnManger: {fileID: 2093356642}
 --- !u!1 &2082518470
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,3 +910,4 @@ MonoBehaviour:
   cameraController: {fileID: 1434951619}
   player1: {fileID: 2069127946}
   player2: {fileID: 2033484120}
+  autoCamFocus: {fileID: 743918852}
