@@ -88,7 +88,7 @@ public class TileManager : MonoBehaviour
         if (range > 0 && tileAdj[direction] != null)
         {
             //CODE FOR ATTACK HERE
-            tileAttacked?.Invoke(this);
+            tileAttacked?.Invoke(tileAdj[direction].GetComponent<TileManager>());
 
             //GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             //obj.transform.position = tileAdj[direction].gameObject.transform.position;
