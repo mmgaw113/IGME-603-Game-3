@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,8 @@ public class TileManager : MonoBehaviour
     [SerializeField] List<TileManager> valueList = new List<TileManager>();
 #endif
 
-    // Start is called before the first frame update
+    public static Action<TileManager> tileAttacked;
+
     void Awake()
     {
         //Populate the dictionary
@@ -86,11 +88,27 @@ public class TileManager : MonoBehaviour
         if (range > 0 && tileAdj[direction] != null)
         {
             //CODE FOR ATTACK HERE
+            tileAttacked?.Invoke(this);
 
             //GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             //obj.transform.position = tileAdj[direction].gameObject.transform.position;
             tileAdj[direction].AttackTile(direction, range - 1);
         }
+    }
+
+    public void AttackOrthogonal(int range)
+    {
+        AttackTile(GridDirection.Left, range);
+        AttackTile(GridDirection.Back, range);
+        AttackTile(GridDirection.Right, range);
+        AttackTile(GridDirection.Forward, range);
+    }
+    public void AttackDiagonal(int range)
+    {
+        AttackTile(GridDirection.LeftBack, range);
+        AttackTile(GridDirection.LeftForward, range);
+        AttackTile(GridDirection.RightBack, range);
+        AttackTile(GridDirection.RightForward, range);
     }
 
     public TileManager GetAdjTile(GridDirection direction)

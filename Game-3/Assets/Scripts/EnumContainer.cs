@@ -21,9 +21,22 @@ public enum PlayerPhase
     Automated
 }
 
-public enum GameState
+public enum GamePhase
 {
-    Player1Turn,
-   Player2Turn,
-    Automation
+    Player1Planning,
+    Player2Planning,
+    PlanResolution
+}
+
+public enum ActionType
+{
+    Move,
+    Attack,
+    Stay
+}
+
+public enum AttackType
+{
+    XAttack,
+    PlusAttack
 }
