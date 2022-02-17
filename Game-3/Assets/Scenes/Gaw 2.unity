@@ -130,10 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -569730072069470878, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
-      propertyPath: turnNumber
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 1261143276920980357, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
       propertyPath: m_Name
       value: Player 2
@@ -182,9 +178,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7133052881207880346, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
-    - {fileID: -569730072069470878, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
 --- !u!1 &271071037 stripped
 GameObject:
@@ -208,20 +202,17 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: 0}
   actionsAllowed: 5
   turnManger: {fileID: 2093356642}
---- !u!114 &271071039
+--- !u!114 &271071039 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2840180704610874308, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
+  m_PrefabInstance: {fileID: 9009958}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 271071037}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf7a352af9891e84ca13ff541c58e847, type: 3}
+  m_Script: {fileID: 11500000, guid: 788c12cae6559c94dab38ad47bc9166a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
-  turnNumber: 1
 --- !u!1 &577263044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1772,4 +1763,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player1: {fileID: 2069127942}
-  player2: {fileID: 0}
+  player2: {fileID: 271071039}

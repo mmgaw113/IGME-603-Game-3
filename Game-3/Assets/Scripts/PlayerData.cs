@@ -11,7 +11,7 @@ public class PlayerData
     public int p2Health;
     public float[] p1Position;
     public float[] p2Position;
-    public PlayerData (Player1 player1)
+    public PlayerData (Player1 player1, Player1 player2)
     {
         p1Health = player1.health;
         p1Turn = player1.turnNumber;
@@ -19,9 +19,7 @@ public class PlayerData
         p1Position[0] = player1.transform.position.x;
         p1Position[1] = player1.transform.position.y;
         p1Position[2] = player1.transform.position.z;
-    }
-    public PlayerData(Player3 player2)
-    {
+
         p2Health = player2.health;
         p2Turn = player2.turnNumber;
         p2Position = new float[3];

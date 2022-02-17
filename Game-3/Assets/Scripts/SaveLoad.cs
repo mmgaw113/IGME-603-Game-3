@@ -2,11 +2,10 @@ using UnityEngine;
 public class SaveLoad : MonoBehaviour
 {
     public Player1 player1;
-    public Player3 player2;
+    public Player1 player2;
     public void SavePlayer()
     {
-        SaveSystem.SavePlayer(player1);
-        SaveSystem.SavePlayer(player2);
+        SaveSystem.SavePlayer(player1, player2);
         Debug.Log("Saved");
     }
     public void LoadPlayer()
