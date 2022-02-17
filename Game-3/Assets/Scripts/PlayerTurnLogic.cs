@@ -27,7 +27,7 @@ public class PlayerTurnLogic : MonoBehaviour
     {
         if (!gridRef)
         {
-           // Debug.LogError($"{gameObject.name}'s turn logic was not given a grid to reference! " +
+            // Debug.LogError($"{gameObject.name}'s turn logic was not given a grid to reference! " +
             //    $"Assign one in the inspector.");
         }
 
@@ -44,7 +44,7 @@ public class PlayerTurnLogic : MonoBehaviour
             case PlayerPhase.Planning:
                 PlanningLogic();
                 break;
-            case PlayerPhase.Automated:             
+            case PlayerPhase.Automated:
                 AutomatedLogic();
                 break;
             case PlayerPhase.Inactive:
@@ -64,7 +64,7 @@ public class PlayerTurnLogic : MonoBehaviour
                 {
                     actionsTaken++;
                     movesPlanned.AddLast(validDir);
-                  //  Debug.Log($"{gameObject.name} successfully moved. " +
+                    //  Debug.Log($"{gameObject.name} successfully moved. " +
                     //    $"Actions taken: {actionsTaken}. Actions left: {actionsAllowed - actionsTaken}.");
                 }
             }
@@ -72,6 +72,7 @@ public class PlayerTurnLogic : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.R))
         {
             ResetPos();
+            movesPlanned.Clear();
         }
 
         //x attack
@@ -103,21 +104,18 @@ public class PlayerTurnLogic : MonoBehaviour
 
             foreach (GridDirection value in movesPlanned)
             {
-                Coroutilities.DoAfterDelay(this, () => { TryMoveToAdjTile(value); startTile = currentTile;}, 1.0f, true);
+                Coroutilities.DoAfterDelay(this, () => { TryMoveToAdjTile(value); startTile = currentTile; }, 1.0f, true);
                 //Debug.Log(value);
             }
-            
+
             automationEnd = true;
             movesPlanned.Clear();
 
             if (attack == AttackType.PlusAttack)
                 currentTile.AttackOrthogonal(1);
-            else if(attack == AttackType.XAttack)
+            else if (attack == AttackType.XAttack)
                 currentTile.AttackDiagonal(1);
         }
-       
-
-        
     }
 
     //  Helper Functions  //
@@ -128,7 +126,7 @@ public class PlayerTurnLogic : MonoBehaviour
         currentTile = startTile;
         actionsTaken = 0;
         //movesPlanned.Clear();
-       // Debug.Log($"{gameObject.name} reset! Actions replenished.");
+        // Debug.Log($"{gameObject.name} reset! Actions replenished.");
     }
 
     private GridDirection? GetInputDirection()
