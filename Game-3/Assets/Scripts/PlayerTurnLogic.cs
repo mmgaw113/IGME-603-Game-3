@@ -23,6 +23,10 @@ public class PlayerTurnLogic : MonoBehaviour
     public static Action<PlayerTurnLogic> endTurn;
     private AttackType attack;
 
+    [SerializeField]
+    private GameObject attack1VFX;
+    [SerializeField]
+    private GameObject attack2VFX;
     private void Start()
     {
         if (!gridRef)
@@ -80,6 +84,10 @@ public class PlayerTurnLogic : MonoBehaviour
         {
             // Debug.Log($"Ended {gameObject.name}'s turn with x attack");
             attack = AttackType.XAttack;
+
+            GameObject ps = Instantiate(attack1VFX, this.transform);
+            Destroy(ps, 0.75f);
+
             endTurn?.Invoke(this);
         }
         //+ attack
@@ -87,6 +95,10 @@ public class PlayerTurnLogic : MonoBehaviour
         {
             // Debug.Log($"Ended {gameObject.name}'s turn with + attack");
             attack = AttackType.PlusAttack;
+
+            GameObject ps = Instantiate(attack2VFX, this.transform);
+            Destroy(ps, 0.75f);
+
             endTurn?.Invoke(this);
         }
     }
