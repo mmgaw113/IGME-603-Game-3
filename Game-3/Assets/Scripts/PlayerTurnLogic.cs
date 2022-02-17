@@ -16,9 +16,8 @@ public class PlayerTurnLogic : MonoBehaviour
     [SerializeField] public TileManager currentTile;
     private int actionsTaken;
     private LinkedList<GridDirection> movesPlanned;
-    private LinkedListNode<GridDirection> node = null;
 
-    [HideInInspector] public bool automationEnd = false;
+    private bool autoLogicGate = false;
 
     public static Action<PlayerTurnLogic> endTurn;
     private AttackType attack;
@@ -27,6 +26,9 @@ public class PlayerTurnLogic : MonoBehaviour
     private GameObject attack1VFX;
     [SerializeField]
     private GameObject attack2VFX;
+
+    public int NumPlannedMoves { get { return movesPlanned.Count; } }
+
     private void Start()
     {
         if (!gridRef)
@@ -39,7 +41,11 @@ public class PlayerTurnLogic : MonoBehaviour
         Coroutilities.DoAfterDelayFrames(this, () => startTile = currentTile = gridRef.GetTile(startGridPos.x, startGridPos.y), 1);
     }
 
-    public void SetPhase(PlayerPhase phase) => currentPhase = phase;
+    public void SetPhase(PlayerPhase phase)
+    {
+        currentPhase = phase;
+        autoLogicGate = false;
+    }
 
     private void Update()
     {
@@ -73,7 +79,7 @@ public class PlayerTurnLogic : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             ResetPos();
             movesPlanned.Clear();
@@ -105,28 +111,37 @@ public class PlayerTurnLogic : MonoBehaviour
 
     private void AutomatedLogic()
     {
-        //Move automatically through the moves made during planning phase. Short delay between each move. Stay sync'd with
-        //  other player, perhaps using a common time step, or an "automation step complete" action.
-        //Use movesPlanned and repeatedly get/remove first until it's empty.
-
-        //Debug.Log(movesPlanned.Count);
-
-        if (!automationEnd)
+        if (!autoLogicGate)
         {
-
-            foreach (GridDirection value in movesPlanned)
+            int i = 1;
+            float delay = 0.5f;
+            while (movesPlanned.Count > 0)
             {
-                Coroutilities.DoAfterDelay(this, () => { TryMoveToAdjTile(value); startTile = currentTile; }, 1.0f, true);
-                //Debug.Log(value);
+                GridDirection dir = movesPlanned.First.Value;
+                Coroutilities.DoAfterDelay(this,
+                    () =>
+                    {
+                        TryMoveToAdjTile(dir);
+                        startTile = currentTile;
+                    },
+                    delay * i
+                );
+                movesPlanned.RemoveFirst();
+                i++;
             }
 
-            automationEnd = true;
-            movesPlanned.Clear();
+            Coroutilities.DoAfterDelay(this,
+                () =>
+                {
+                    if (attack == AttackType.PlusAttack)
+                        currentTile.AttackOrthogonal(1);
+                    else
+                        currentTile.AttackDiagonal(1);
+                },
+                delay * i
+            );
 
-            if (attack == AttackType.PlusAttack)
-                currentTile.AttackOrthogonal(1);
-            else if (attack == AttackType.XAttack)
-                currentTile.AttackDiagonal(1);
+            autoLogicGate = true;
         }
     }
 
@@ -137,7 +152,6 @@ public class PlayerTurnLogic : MonoBehaviour
         transform.position = startTile.transform.position + offset;
         currentTile = startTile;
         actionsTaken = 0;
-        //movesPlanned.Clear();
         // Debug.Log($"{gameObject.name} reset! Actions replenished.");
     }
 

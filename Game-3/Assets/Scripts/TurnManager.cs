@@ -97,13 +97,12 @@ public class TurnManager : MonoBehaviour
 
     public void TestEndofResolution()
     {
-        if(play1Turn.automationEnd == true && play2Turn.automationEnd == true)
+        if (currentGamePhase == GamePhase.PlanResolution
+            && play1Turn.NumPlannedMoves <= 0
+            && play2Turn.NumPlannedMoves <= 0)
         {
-            play1Turn.automationEnd = false;
-            play2Turn.automationEnd = false;
-
             InitPhase(GamePhase.Player1Planning);
         }
-        
+
     }
 }
