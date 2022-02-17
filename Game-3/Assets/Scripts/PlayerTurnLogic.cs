@@ -13,7 +13,7 @@ public class PlayerTurnLogic : MonoBehaviour
 
     private PlayerPhase currentPhase;
     [SerializeField] private TileManager startTile;
-    [SerializeField] private TileManager currentTile;
+    [SerializeField] public TileManager currentTile;
     private int actionsTaken;
     private LinkedList<GridDirection> movesPlanned;
     private LinkedListNode<GridDirection> node = null;
@@ -21,6 +21,7 @@ public class PlayerTurnLogic : MonoBehaviour
     [HideInInspector] public bool automationEnd = false;
 
     public static Action<PlayerTurnLogic> endTurn;
+    private AttackType attack;
 
     private void Start()
     {
@@ -76,15 +77,15 @@ public class PlayerTurnLogic : MonoBehaviour
         //x attack
         if (Input.GetKeyDown(KeyCode.E))
         {
-           // Debug.Log($"Ended {gameObject.name}'s turn with x attack");
-            currentTile.AttackDiagonal(1);
+            // Debug.Log($"Ended {gameObject.name}'s turn with x attack");
+            attack = AttackType.XAttack;
             endTurn?.Invoke(this);
         }
         //+ attack
         else if (Input.GetKeyDown(KeyCode.Q))
         {
-           // Debug.Log($"Ended {gameObject.name}'s turn with + attack");
-            currentTile.AttackOrthogonal(1);
+            // Debug.Log($"Ended {gameObject.name}'s turn with + attack");
+            attack = AttackType.PlusAttack;
             endTurn?.Invoke(this);
         }
     }
@@ -108,6 +109,11 @@ public class PlayerTurnLogic : MonoBehaviour
             
             automationEnd = true;
             movesPlanned.Clear();
+
+            if (attack == AttackType.PlusAttack)
+                currentTile.AttackOrthogonal(1);
+            else if(attack == AttackType.XAttack)
+                currentTile.AttackDiagonal(1);
         }
        
 

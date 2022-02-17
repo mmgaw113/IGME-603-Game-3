@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1261143276920980357, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
+      propertyPath: m_TagString
+      value: Player2
+      objectReference: {fileID: 0}
     - target: {fileID: 3073912643102930736, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -199,7 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridRef: {fileID: 1166101292}
   startGridPos: {x: 4, y: 4}
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 1, z: 0}
   actionsAllowed: 5
   startTile: {fileID: 0}
   currentTile: {fileID: 0}
@@ -533,6 +537,10 @@ PrefabInstance:
     - target: {fileID: 1261143276920980357, guid: fa8749db628148341af68e233c60f267, type: 3}
       propertyPath: m_Name
       value: Player 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261143276920980357, guid: fa8749db628148341af68e233c60f267, type: 3}
+      propertyPath: m_TagString
+      value: Player1
       objectReference: {fileID: 0}
     - target: {fileID: 3073912643102930736, guid: fa8749db628148341af68e233c60f267, type: 3}
       propertyPath: m_RootOrder
