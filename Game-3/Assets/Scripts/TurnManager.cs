@@ -34,11 +34,6 @@ public class TurnManager : MonoBehaviour
     private void Update()
     {
         TestEndofResolution();
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
     }
 
     /// <summary>

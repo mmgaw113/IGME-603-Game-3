@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Player1 : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class Player1 : MonoBehaviour
 
     PlayerTurnLogic turnLogic;
     TileManager currentTile;
+    public TextMeshProUGUI text;
     
     private void Awake()
     {
@@ -40,6 +43,7 @@ public class Player1 : MonoBehaviour
     void Update()
     {
         currentTile = turnLogic.currentTile;
+        text.text = "Player 1 Health: " + health;
     }
 
     void TakeDamage(TileManager tile)
