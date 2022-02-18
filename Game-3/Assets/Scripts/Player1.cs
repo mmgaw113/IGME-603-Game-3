@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Player1 : MonoBehaviour
 {
@@ -8,30 +10,26 @@ public class Player1 : MonoBehaviour
     public int turnNumber = 1;
 
     PlayerTurnLogic turnLogic;
+
     TileManager currentTile;
-    
+    public TextMeshProUGUI text;
+
     private void Awake()
     {
-        turnLogic = gameObject.GetComponent<PlayerTurnLogic>();    
+        turnLogic = gameObject.GetComponent<PlayerTurnLogic>();
     }
 
     private void OnEnable()
     {
-        TileManager.tileAttacked += OnTileAttack;
+        TileManager.tileAttacked += CheckIfTakeDamage;
     }
 
     private void OnDisable()
     {
-        TileManager.tileAttacked -= OnTileAttack;
+        TileManager.tileAttacked -= CheckIfTakeDamage;
     }
 
-    void OnTileAttack(TileManager tile)
-    {
-            TakeDamage(tile);
-    }
-
-    // Start is called before the first frame update
-    void Start()
+    private void CheckIfTakeDamage(TileManager tile)
     {
         
     }
@@ -40,11 +38,20 @@ public class Player1 : MonoBehaviour
     void Update()
     {
         currentTile = turnLogic.currentTile;
+        text.text = "Player 1 Health: " + health;
     }
 
     void TakeDamage(TileManager tile)
     {
         if (tile == currentTile && health > 0)
+        {
             health--;
+            Debug.Log($"{gameObject.name} was hit! Health remaining: {health}");
+
+            if (health <= 0)
+            {
+                Debug.Log($"{gameObject.name} has run out of health! They lose.");
+            }
+        }
     }
 }
