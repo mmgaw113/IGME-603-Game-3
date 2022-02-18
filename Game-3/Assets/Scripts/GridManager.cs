@@ -53,6 +53,7 @@ public class GridManager : MonoBehaviour
 
     private void OnAttackQuadrant(int quadNum)
     {
+        Debug.Log($"<color=#ff0000>Attack on quadrant {quadNum} engaged.</color>");
         //Init assuming upper left corner, therefore, RightBack points to center
         TileManager tile = null;
         var toCenter = (x: GridDirection.Right, y: GridDirection.Back);
@@ -92,9 +93,11 @@ public class GridManager : MonoBehaviour
         for (int i = 0; i < quadSize; i++)
         {
             //Attack self, then attack along the X. Then move down to the next row.
+            Debug.Log($"<color=#ff0000>\tAttacking {tile.name} and those {toCenter.x} of it.</color>");
             tile.AttackSelf();
             tile.AttackTile(toCenter.x, quadSize - 1);
             tile = tile.GetAdjTile(toCenter.y);
+            Debug.Log($"<color=#ff0000>\t\tMoved one tile {toCenter.y}.</color>");
         }
     }
 
