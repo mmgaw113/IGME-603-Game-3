@@ -87,13 +87,19 @@ public class TileManager : MonoBehaviour
         //Exit to the recursion or get out if there isn't a tile in that direction
         if (range > 0 && tileAdj[direction] != null)
         {
-            //CODE FOR ATTACK HERE
-            tileAttacked?.Invoke(tileAdj[direction].GetComponent<TileManager>());
+            tileAttacked?.Invoke(tileAdj[direction]);
+            //Debug.Log($"\t<color=#ff5555>Attacked {tileAdj[direction].name}!</color>");
 
             //GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             //obj.transform.position = tileAdj[direction].gameObject.transform.position;
             tileAdj[direction].AttackTile(direction, range - 1);
         }
+    }
+
+    public void AttackTile()
+    {
+        tileAttacked?.Invoke(this);
+        //Debug.Log($"\t<color=#ff5555>Attacked {name}!</color>");
     }
 
     public void AttackOrthogonal(int range)

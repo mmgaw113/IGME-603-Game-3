@@ -31,6 +31,7 @@ public class PlayerTurnLogic : MonoBehaviour
     private GameObject attack2VFX;
 
     public int NumPlannedMoves { get { return movesPlanned.Count; } }
+    public PlayerPhase CurrentPhase { get { return currentPhase; } }
 
     private void Start()
     {
@@ -88,28 +89,58 @@ public class PlayerTurnLogic : MonoBehaviour
             movesPlanned.Clear();
         }
 
-        //x attack
-        if (Input.GetKeyDown(KeyCode.E))
+        if (GetMultiKeyDown(out KeyCode key,
+            KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4,
+            KeyCode.Keypad1, KeyCode.Keypad2, KeyCode.Keypad3, KeyCode.Keypad4))
         {
-            // Debug.Log($"Ended {gameObject.name}'s turn with x attack");
-            attack = AttackType.XAttack;
+            switch (key)
+            {
+                case KeyCode.Alpha1:
+                case KeyCode.Keypad1:
+                    attack = AttackType.Quadrant1;
+                    break;
+                case KeyCode.Alpha2:
+                case KeyCode.Keypad2:
+                    attack = AttackType.Quadrant2;
+                    break;
+                case KeyCode.Alpha3:
+                case KeyCode.Keypad3:
+                    attack = AttackType.Quadrant3;
+                    break;
+                case KeyCode.Alpha4:
+                case KeyCode.Keypad4:
+                    attack = AttackType.Quadrant4;
+                    break;
+                default:
+                    break;
+            }
 
-            GameObject ps = Instantiate(attack1VFX, this.transform);
-            Destroy(ps, 0.75f);
-
+            //Debug.Log($"Ended {gameObject.name}'s turn; {key} was pressed.");
             endTurn?.Invoke(this);
         }
-        //+ attack
-        else if (Input.GetKeyDown(KeyCode.Q))
-        {
-            // Debug.Log($"Ended {gameObject.name}'s turn with + attack");
-            attack = AttackType.PlusAttack;
 
-            GameObject ps = Instantiate(attack2VFX, this.transform);
-            Destroy(ps, 0.75f);
+        ////x attack
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    // Debug.Log($"Ended {gameObject.name}'s turn with x attack");
+        //    attack = AttackType.XAttack;
 
-            endTurn?.Invoke(this);
-        }
+        //    GameObject ps = Instantiate(attack1VFX, this.transform);
+        //    Destroy(ps, 0.75f);
+
+        //    endTurn?.Invoke(this);
+        //}
+        ////+ attack
+        //else if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    // Debug.Log($"Ended {gameObject.name}'s turn with + attack");
+        //    attack = AttackType.PlusAttack;
+
+        //    GameObject ps = Instantiate(attack2VFX, this.transform);
+        //    Destroy(ps, 0.75f);
+
+        //    endTurn?.Invoke(this);
+        //}
     }
 
     private void AutomatedLogic()
@@ -126,6 +157,7 @@ public class PlayerTurnLogic : MonoBehaviour
                     {
                         TryMoveToAdjTile(dir);
                         startTile = currentTile;
+                        //Debug.Log($"<color=#505050>{name} moves to {currentTile.name}...</color>");
                     },
                     delay * i
                 );
@@ -136,10 +168,29 @@ public class PlayerTurnLogic : MonoBehaviour
             Coroutilities.DoAfterDelay(this,
                 () =>
                 {
-                    if (attack == AttackType.PlusAttack)
-                        currentTile.AttackOrthogonal(1);
-                    else
-                        currentTile.AttackDiagonal(1);
+                    //if (attack == AttackType.PlusAttack)
+                    //    currentTile.AttackOrthogonal(1);
+                    //else if (attack == AttackType.XAttack)
+                    //    currentTile.AttackDiagonal(1);
+                    switch (attack)
+                    {
+                        case AttackType.Quadrant1:
+                            GridManager.attackQuadrant?.Invoke(1);
+                            break;
+                        case AttackType.Quadrant2:
+                            GridManager.attackQuadrant?.Invoke(2);
+                            break;
+                        case AttackType.Quadrant3:
+                            GridManager.attackQuadrant?.Invoke(3);
+                            break;
+                        case AttackType.Quadrant4:
+                            GridManager.attackQuadrant?.Invoke(4);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    currentPhase = PlayerPhase.Inactive;
                 },
                 delay * i
             );
@@ -200,5 +251,27 @@ public class PlayerTurnLogic : MonoBehaviour
         {
             return false;
         }
+    }
+
+    /// <summary>
+    /// Takes in any number of keys and returns the first one of them that's down, in the order they were passed.<br/>
+    /// This allows you to use a switch statement with <paramref name="keyDown"/> instead of a ton of else-ifs.
+    /// </summary>
+    /// <param name="keyDown">The first key in <paramref name="codes"/> that was found to be down in the order they were passed.</param>
+    /// <param name="codes">The keys you want to check.</param>
+    /// <returns>Whether any of the keys in <paramref name="codes"/> was down or not.</returns>
+    private bool GetMultiKeyDown(out KeyCode keyDown, params KeyCode[] codes)
+    {
+        for (int i = 0; i < codes.Length; i++)
+        {
+            if (Input.GetKeyDown(codes[i]))
+            {
+                keyDown = codes[i];
+                return true;
+            }
+        }
+
+        keyDown = KeyCode.None;
+        return false;
     }
 }

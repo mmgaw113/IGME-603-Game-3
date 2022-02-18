@@ -38,5 +38,9 @@ public enum ActionType
 public enum AttackType
 {
     XAttack,
-    PlusAttack
+    PlusAttack,
+    Quadrant1,
+    Quadrant2,
+    Quadrant3,
+    Quadrant4
 }
