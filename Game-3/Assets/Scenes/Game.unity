@@ -309,6 +309,7 @@ MonoBehaviour:
   currentTile: {fileID: 0}
   attack1VFX: {fileID: 2159203273920230444, guid: bc9c325bcc3fb2b4db2edf8384bccacb, type: 3}
   attack2VFX: {fileID: 3418974339116289163, guid: 52504bf9ffbed7d48a02e91faf27371b, type: 3}
+  isPlayer1: 0
 --- !u!1 &577263044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,6 +1099,7 @@ MonoBehaviour:
   currentTile: {fileID: 0}
   attack1VFX: {fileID: 2159203273920230444, guid: bc9c325bcc3fb2b4db2edf8384bccacb, type: 3}
   attack2VFX: {fileID: 3418974339116289163, guid: 52504bf9ffbed7d48a02e91faf27371b, type: 3}
+  isPlayer1: 1
 --- !u!1 &2082518470
 GameObject:
   m_ObjectHideFlags: 0

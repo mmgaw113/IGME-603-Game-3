@@ -27,6 +27,8 @@ public class PlayerTurnLogic : MonoBehaviour
     [SerializeField]
     private GameObject attack2VFX;
 
+    public bool isPlayer1;
+
     public int NumPlannedMoves { get { return movesPlanned.Count; } }
     public PlayerPhase CurrentPhase { get { return currentPhase; } }
 
@@ -172,16 +174,16 @@ public class PlayerTurnLogic : MonoBehaviour
                     switch (attack)
                     {
                         case AttackType.Quadrant1:
-                            GridManager.attackQuadrant?.Invoke(1);
+                            GridManager.attackQuadrant?.Invoke(1, isPlayer1);
                             break;
                         case AttackType.Quadrant2:
-                            GridManager.attackQuadrant?.Invoke(2);
+                            GridManager.attackQuadrant?.Invoke(2, isPlayer1);
                             break;
                         case AttackType.Quadrant3:
-                            GridManager.attackQuadrant?.Invoke(3);
+                            GridManager.attackQuadrant?.Invoke(3, isPlayer1);
                             break;
                         case AttackType.Quadrant4:
-                            GridManager.attackQuadrant?.Invoke(4);
+                            GridManager.attackQuadrant?.Invoke(4, isPlayer1);
                             break;
                         default:
                             break;

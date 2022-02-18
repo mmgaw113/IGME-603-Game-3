@@ -12,10 +12,16 @@ public class TileIndicator : MonoBehaviour
 
     private Vector3 currentPos;
     private Vector3 oscDir;
+
+    public GameObject blueAttackVFX;
+    public GameObject redAttackVFX;
     void Start()
     {
         currentPos = transform.position;
         oscDir = new Vector3(0f, 1f, 0f);
+
+        redAttackVFX.SetActive(false);
+        blueAttackVFX.SetActive(false);
     }
 
     // Update is called once per frame
@@ -28,5 +34,20 @@ public class TileIndicator : MonoBehaviour
         Vector3 osc = offset * oscDir;
 
         transform.position = targetPosition + osc;
+    }
+    public IEnumerator PlayAttackEffect(bool isPlayer1)
+    {
+        if (isPlayer1)
+        {
+            blueAttackVFX.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            blueAttackVFX.SetActive(false);
+        }
+        else
+        {
+            redAttackVFX.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            redAttackVFX.SetActive(false);
+        }
     }
 }
