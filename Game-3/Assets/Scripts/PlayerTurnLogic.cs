@@ -112,7 +112,7 @@ public class PlayerTurnLogic : MonoBehaviour
                     break;
             }
 
-            Debug.Log($"Ended {gameObject.name}'s turn; {key} was pressed.");
+            //Debug.Log($"Ended {gameObject.name}'s turn; {key} was pressed.");
             endTurn?.Invoke(this);
         }
 
@@ -154,6 +154,7 @@ public class PlayerTurnLogic : MonoBehaviour
                     {
                         TryMoveToAdjTile(dir);
                         startTile = currentTile;
+                        //Debug.Log($"<color=#505050>{name} moves to {currentTile.name}...</color>");
                     },
                     delay * i
                 );
