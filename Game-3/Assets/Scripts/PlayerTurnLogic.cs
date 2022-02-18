@@ -22,6 +22,9 @@ public class PlayerTurnLogic : MonoBehaviour
     public static Action<PlayerTurnLogic> endTurn;
     private AttackType attack;
 
+    private bool turnOverP1;
+    private bool turnOverP2;
+
     [SerializeField]
     private GameObject attack1VFX;
     [SerializeField]

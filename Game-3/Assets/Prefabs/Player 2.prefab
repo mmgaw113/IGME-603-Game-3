@@ -12,11 +12,10 @@ GameObject:
   - component: {fileID: 2913919379610439644}
   - component: {fileID: 6544654420560356888}
   - component: {fileID: 1295896433903939452}
-  - component: {fileID: 2840180704610874308}
-  - component: {fileID: 271071038}
+  - component: {fileID: 5040681202376047576}
   m_Layer: 0
   m_Name: Player 2
-  m_TagString: Player2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +97,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2840180704610874308
+--- !u!114 &5040681202376047576
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,29 +106,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1261143276920980357}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 788c12cae6559c94dab38ad47bc9166a, type: 3}
+  m_Script: {fileID: 11500000, guid: f2470e59e9fdc4f4d85c46e37d4dea39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
   turnNumber: 1
---- !u!114 &271071038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1261143276920980357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 496611fa147d82d4ea7d240549d4f088, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridRef: {fileID: 0}
-  startGridPos: {x: 4, y: 4}
-  offset: {x: 0, y: 1, z: 0}
-  actionsAllowed: 5
-  startTile: {fileID: 0}
-  currentTile: {fileID: 0}
-  attack1VFX: {fileID: 2159203273920230444, guid: bc9c325bcc3fb2b4db2edf8384bccacb, type: 3}
-  attack2VFX: {fileID: 3418974339116289163, guid: 52504bf9ffbed7d48a02e91faf27371b, type: 3}
-  isPlayer1: 0
