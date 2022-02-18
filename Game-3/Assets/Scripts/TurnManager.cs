@@ -103,11 +103,10 @@ public class TurnManager : MonoBehaviour
     public void TestEndofResolution()
     {
         if (currentGamePhase == GamePhase.PlanResolution
-            && play1Turn.NumPlannedMoves <= 0
-            && play2Turn.NumPlannedMoves <= 0)
+            && play1Turn.CurrentPhase == PlayerPhase.Inactive
+            && play2Turn.CurrentPhase == PlayerPhase.Inactive)
         {
             InitPhase(GamePhase.Player1Planning);
         }
-
     }
 }
