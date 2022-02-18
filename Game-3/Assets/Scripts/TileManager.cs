@@ -96,6 +96,8 @@ public class TileManager : MonoBehaviour
         }
     }
 
+    public void AttackSelf() => tileAttacked?.Invoke(this);
+
     public void AttackOrthogonal(int range)
     {
         AttackTile(GridDirection.Left, range);
