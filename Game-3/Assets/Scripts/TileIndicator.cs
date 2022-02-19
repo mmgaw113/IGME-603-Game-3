@@ -35,6 +35,7 @@ public class TileIndicator : MonoBehaviour
 
         transform.position = targetPosition + osc;
     }
+
     public IEnumerator PlayAttackEffect(bool isPlayer1)
     {
         if (isPlayer1)

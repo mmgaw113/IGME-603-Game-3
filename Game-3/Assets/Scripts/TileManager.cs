@@ -16,7 +16,6 @@ public class TileManager : MonoBehaviour
     public static Action<TileManager> tileAttacked;
 
     public TileIndicator indicator;
-
     void Awake()
     {
         //Populate the dictionary
@@ -98,7 +97,8 @@ public class TileManager : MonoBehaviour
             //obj.transform.position = tileAdj[direction].gameObject.transform.position;
             tileAdj[direction].AttackTile(direction, range - 1);
 
-            StartCoroutine(indicator.PlayAttackEffect(isPlayer1));
+            // Play particle system
+            StartCoroutine(tileAdj[direction].indicator.PlayAttackEffect(isPlayer1));
         }
     }
 
@@ -106,6 +106,7 @@ public class TileManager : MonoBehaviour
     {
         tileAttacked?.Invoke(this);
 
+        // Play particle system
         StartCoroutine(indicator.PlayAttackEffect(isPlayer1));
         //Debug.Log($"\t<color=#ff5555>Attacked {name}!</color>");
     }

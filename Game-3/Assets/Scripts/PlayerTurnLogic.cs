@@ -29,6 +29,7 @@ public class PlayerTurnLogic : MonoBehaviour
     private GameObject attack1VFX;
     [SerializeField]
     private GameObject attack2VFX;
+    public bool isPlayer1;
 
     public bool isPlayer1;
 

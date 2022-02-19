@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 6544654420560356888}
   - component: {fileID: 1295896433903939452}
   - component: {fileID: -8822539596510111079}
+  - component: {fileID: 2069127947}
   m_Layer: 0
   m_Name: Player 1
-  m_TagString: Untagged
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,4 +111,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
-  playerPosition: {fileID: 3073912643102930736}
+  turnNumber: 1
+--- !u!114 &2069127947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261143276920980357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 496611fa147d82d4ea7d240549d4f088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridRef: {fileID: 0}
+  startGridPos: {x: 0, y: 0}
+  offset: {x: 0, y: 1, z: 0}
+  actionsAllowed: 5
+  startTile: {fileID: 0}
+  currentTile: {fileID: 0}
+  attack1VFX: {fileID: 2159203273920230444, guid: bc9c325bcc3fb2b4db2edf8384bccacb, type: 3}
+  attack2VFX: {fileID: 3418974339116289163, guid: 52504bf9ffbed7d48a02e91faf27371b, type: 3}
+  isPlayer1: 1
