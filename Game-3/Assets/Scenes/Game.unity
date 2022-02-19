@@ -616,6 +616,7 @@ MonoBehaviour:
   currentTile: {fileID: 0}
   attack1VFX: {fileID: 2159203273920230444, guid: bc9c325bcc3fb2b4db2edf8384bccacb, type: 3}
   attack2VFX: {fileID: 3418974339116289163, guid: 52504bf9ffbed7d48a02e91faf27371b, type: 3}
+  isPlayer1: 0
 --- !u!114 &271071039 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5040681202376047576, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
@@ -4033,6 +4034,7 @@ MonoBehaviour:
   currentTile: {fileID: 0}
   attack1VFX: {fileID: 2159203273920230444, guid: bc9c325bcc3fb2b4db2edf8384bccacb, type: 3}
   attack2VFX: {fileID: 3418974339116289163, guid: 52504bf9ffbed7d48a02e91faf27371b, type: 3}
+  isPlayer1: 1
 --- !u!1 &2082518470
 GameObject:
   m_ObjectHideFlags: 0
