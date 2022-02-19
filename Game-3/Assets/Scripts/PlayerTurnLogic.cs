@@ -31,6 +31,7 @@ public class PlayerTurnLogic : MonoBehaviour
     private GameObject attack2VFX;
 
     public int NumPlannedMoves { get { return movesPlanned.Count; } }
+    public PlayerPhase CurrentPhase { get { return currentPhase; } }
 
     private void Start()
     {
@@ -140,6 +141,8 @@ public class PlayerTurnLogic : MonoBehaviour
                         currentTile.AttackOrthogonal(1);
                     else
                         currentTile.AttackDiagonal(1);
+
+                    currentPhase = PlayerPhase.Inactive;
                 },
                 delay * i
             );
