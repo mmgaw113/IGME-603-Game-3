@@ -14,7 +14,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] GameObject tilePrefab;
     TileManager[,] tiles;
 
-    public static Action<int> attackQuadrant;
+    public static Action<int, bool> attackQuadrant;
 
     void Start()
     {
@@ -51,7 +51,7 @@ public class GridManager : MonoBehaviour
     private void OnEnable() { attackQuadrant += OnAttackQuadrant; }
     private void OnDisable() { attackQuadrant -= OnAttackQuadrant; }
 
-    private void OnAttackQuadrant(int quadNum)
+    private void OnAttackQuadrant(int quadNum, bool isPlayer1 = false)
     {
         //Init assuming upper left corner, therefore, RightBack points to center
         TileManager tile = null;
@@ -95,8 +95,8 @@ public class GridManager : MonoBehaviour
         for (int i = 0; i < quadSize; i++)
         {
             //Attack self, then attack along the X. Then move down to the next row.
-            tile.AttackTile();
-            tile.AttackTile(toCenter.x, quadSize - 1);
+            tile.AttackTile(isPlayer1);
+            tile.AttackTile(toCenter.x, quadSize - 1, isPlayer1);
             tile = tile.GetAdjTile(toCenter.y);
         }
     }

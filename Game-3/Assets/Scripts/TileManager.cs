@@ -15,6 +15,8 @@ public class TileManager : MonoBehaviour
 
     public static Action<TileManager> tileAttacked;
 
+    public TileIndicator indicator;
+
     void Awake()
     {
         //Populate the dictionary
@@ -26,6 +28,8 @@ public class TileManager : MonoBehaviour
         tileAdj.Add(GridDirection.Back, null);
         tileAdj.Add(GridDirection.LeftBack, null);
         tileAdj.Add(GridDirection.Left, null);
+
+        indicator = GetComponentInChildren<TileIndicator>();
     }
 
     //Populates the dictionary
@@ -82,7 +86,7 @@ public class TileManager : MonoBehaviour
     //Helper Fnction
     public void SetConnection(GridDirection key, TileManager tile) => tileAdj[key] = tile;
 
-    public void AttackTile(GridDirection direction, int range)
+    public void AttackTile(GridDirection direction, int range, bool isPlayer1 = false)
     {
         //Exit to the recursion or get out if there isn't a tile in that direction
         if (range > 0 && tileAdj[direction] != null)
@@ -93,12 +97,16 @@ public class TileManager : MonoBehaviour
             //GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             //obj.transform.position = tileAdj[direction].gameObject.transform.position;
             tileAdj[direction].AttackTile(direction, range - 1);
+
+            StartCoroutine(indicator.PlayAttackEffect(isPlayer1));
         }
     }
 
-    public void AttackTile()
+    public void AttackTile(bool isPlayer1 = false)
     {
         tileAttacked?.Invoke(this);
+
+        StartCoroutine(indicator.PlayAttackEffect(isPlayer1));
         //Debug.Log($"\t<color=#ff5555>Attacked {name}!</color>");
     }
 
