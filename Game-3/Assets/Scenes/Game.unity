@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1261143276920980357, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
+      propertyPath: m_TagString
+      value: Player2
+      objectReference: {fileID: 0}
     - target: {fileID: 3073912643102930736, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -605,7 +609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridRef: {fileID: 1166101292}
-  startGridPos: {x: 0, y: 0}
+  startGridPos: {x: 4, y: 4}
   offset: {x: 0, y: 1, z: 0}
   actionsAllowed: 5
   startTile: {fileID: 0}
@@ -2389,13 +2393,17 @@ PrefabInstance:
       propertyPath: text
       value: 
       objectReference: {fileID: 737295679}
-    - target: {fileID: 2069127947, guid: fa8749db628148341af68e233c60f267, type: 3}
-      propertyPath: gridRef
-      value: 
-      objectReference: {fileID: 1166101292}
+    - target: {fileID: -8822539596510111079, guid: fa8749db628148341af68e233c60f267, type: 3}
+      propertyPath: turnNumber
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1261143276920980357, guid: fa8749db628148341af68e233c60f267, type: 3}
       propertyPath: m_Name
       value: Player 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261143276920980357, guid: fa8749db628148341af68e233c60f267, type: 3}
+      propertyPath: m_TagString
+      value: Player1
       objectReference: {fileID: 0}
     - target: {fileID: 3073912643102930736, guid: fa8749db628148341af68e233c60f267, type: 3}
       propertyPath: m_RootOrder
@@ -2448,7 +2456,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -8822539596510111079, guid: fa8749db628148341af68e233c60f267, type: 3}
   m_PrefabInstance: {fileID: 1280760761}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2069127941}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 788c12cae6559c94dab38ad47bc9166a, type: 3}
@@ -3995,6 +4003,11 @@ CanvasRenderer:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3073912643102930736, guid: 5da24b43d012bcd4b8cda49b58dc3a0d, type: 3}
   m_PrefabInstance: {fileID: 9009958}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2069127941 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1261143276920980357, guid: fa8749db628148341af68e233c60f267, type: 3}
+  m_PrefabInstance: {fileID: 1280760761}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2069127946 stripped
 Transform:
