@@ -13,6 +13,8 @@ public class Player1 : MonoBehaviour
 
     TileManager currentTile;
     public TextMeshProUGUI text;
+    public TextMeshProUGUI gameOverText;
+    public GameObject gameOverScreen;
 
     private void Awake()
     {
@@ -50,6 +52,8 @@ public class Player1 : MonoBehaviour
 
             if (health <= 0)
             {
+                gameOverScreen.SetActive(true);
+                gameOverText.text = gameObject.name + " Lost! Player 2 wins, GG!";
                 Debug.Log($"{gameObject.name} has run out of health! They lose.");
             }
         }

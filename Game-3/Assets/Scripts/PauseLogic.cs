@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseLogic : MonoBehaviour
 {
@@ -31,5 +32,9 @@ public class PauseLogic : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("Quit");
+    }
+    public void PlayAgain()
+    {
+        SceneManager.LoadScene("Game");
     }
 }

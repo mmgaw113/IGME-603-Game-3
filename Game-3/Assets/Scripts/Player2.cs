@@ -12,7 +12,8 @@ public class Player2 : MonoBehaviour
     PlayerTurnLogic turnLogic;
     TileManager currentTile;
     public TextMeshProUGUI text;
-
+    public TextMeshProUGUI gameOverText;
+    public GameObject gameOverScreen;
     private void Awake()
     {
         turnLogic = gameObject.GetComponent<PlayerTurnLogic>();
@@ -30,7 +31,7 @@ public class Player2 : MonoBehaviour
 
     void OnTileAttack(TileManager tile)
     {
-            TakeDamage(tile);
+        TakeDamage(tile);
     }
 
     // Start is called before the first frame update
@@ -55,6 +56,8 @@ public class Player2 : MonoBehaviour
 
             if (health <= 0)
             {
+                gameOverScreen.SetActive(true);
+                gameOverText.text = gameObject.name + " Lost! Player 1 wins, GG!";
                 Debug.Log($"{gameObject.name} has run out of health! They lose.");
             }
         }
