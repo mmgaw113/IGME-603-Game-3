@@ -49,7 +49,15 @@ public class Player2 : MonoBehaviour
     void TakeDamage(TileManager tile)
     {
         if (tile == currentTile && health > 0)
+        {
             health--;
+            Debug.Log($"{gameObject.name} was hit! Health remaining: {health}");
+
+            if (health <= 0)
+            {
+                Debug.Log($"{gameObject.name} has run out of health! They lose.");
+            }
+        }
     }
 }
 

@@ -31,7 +31,7 @@ public class Player1 : MonoBehaviour
 
     private void CheckIfTakeDamage(TileManager tile)
     {
-        
+        TakeDamage(tile);
     }
 
     // Update is called once per frame
