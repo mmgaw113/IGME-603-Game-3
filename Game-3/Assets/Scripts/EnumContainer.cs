@@ -25,7 +25,8 @@ public enum GamePhase
 {
     Player1Planning,
     Player2Planning,
-    PlanResolution
+    PlanResolution,
+    GameOver
 }
 
 public enum ActionType

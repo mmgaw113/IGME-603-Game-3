@@ -6,8 +6,8 @@ public class TurnManager : MonoBehaviour
 {
     public CameraController cameraController;
 
-    public Transform player1;
-    public Transform player2;
+    public Player1 player1;
+    public Player2 player2;
     public Transform autoCamFocus;
 
     private PlayerTurnLogic play1Turn;
@@ -34,6 +34,7 @@ public class TurnManager : MonoBehaviour
     private void Update()
     {
         TestEndofResolution();
+        TestEndofGame();
     }
 
     /// <summary>
@@ -55,7 +56,7 @@ public class TurnManager : MonoBehaviour
             case GamePhase.Player1Planning:
                 currentGamePhase = GamePhase.Player1Planning;
 
-                cameraController.SetFollowLookAtTarget(player1, player1);
+                cameraController.SetFollowLookAtTarget(player1.gameObject.transform, player1.gameObject.transform);
 
                 play1Turn.SetPhase(PlayerPhase.Planning);
                 play2Turn.SetPhase(PlayerPhase.Inactive);
@@ -64,7 +65,7 @@ public class TurnManager : MonoBehaviour
             case GamePhase.Player2Planning:
                 currentGamePhase = GamePhase.Player2Planning;
 
-                cameraController.SetFollowLookAtTarget(player2, player2);
+                cameraController.SetFollowLookAtTarget(player2.gameObject.transform, player2.gameObject.transform);
 
                 play1Turn.SetPhase(PlayerPhase.Inactive);
                 play2Turn.SetPhase(PlayerPhase.Planning);
@@ -103,5 +104,14 @@ public class TurnManager : MonoBehaviour
         {
             InitPhase(GamePhase.Player1Planning);
         }
+    }
+
+    public void TestEndofGame()
+    {
+        if (player1.health <= 0 || player2.health <= 0)
+        {
+            currentGamePhase = GamePhase.GameOver;
+        }
+            
     }
 }

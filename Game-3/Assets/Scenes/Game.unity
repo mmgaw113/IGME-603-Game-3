@@ -4618,8 +4618,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraController: {fileID: 1434951619}
-  player1: {fileID: 2069127946}
-  player2: {fileID: 2033484120}
+  player1: {fileID: 1280760762}
+  player2: {fileID: 271071039}
   autoCamFocus: {fileID: 743918852}
 --- !u!114 &2093356643
 MonoBehaviour:
